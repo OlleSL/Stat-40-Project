@@ -40,20 +40,12 @@ wine130[wine130$taster_name == "Michael Schachner" &
 wine[wine$reviewer == "Michael Schachner" & 
        wine$wine == "Segura Viudas NV Extra Dry Sparkling (Cava)",]
 
-new_wine = merge(wine130, wine, by.x = "title", by.y = "wine")
+
+#new_wine = merge(wine130, wine, by.x = "title", by.y = "wine")
 
 #add a new column showcasing level of wine ratings (low, moderate, high)
-new_wine = new_wine %>%
-  mutate(level_rating = case_when(rating >= 80 && rating <= 86 ~ "Low",
-                                  rating >= 87 && rating <= 93 ~ "Moderate",
-                                  rating >= 94 && rating <= 100 ~ "High",))
+#new_wine = new_wine %>%
+#  mutate(level_rating = case_when(rating >= 80 && rating <= 86 ~ "Low",
+#                                  rating >= 87 && rating <= 93 ~ "Moderate",
+#                                  rating >= 94 && rating <= 100 ~ "High",))
 
-range(new_wine$rating)
-new_wine$rating
-
-View(new_wine)
-head(new_wine)
-str(new_wine)
-
-str(wine130)
-str(wine)
