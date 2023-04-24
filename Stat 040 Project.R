@@ -1,5 +1,3 @@
-#Stat 040 Project
-
 #Clear work space:
 rm (list = ls())
 #Load library:
