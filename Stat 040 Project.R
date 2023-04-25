@@ -47,3 +47,7 @@ wine[wine$reviewer == "Michael Schachner" &
 #                                  rating >= 87 && rating <= 93 ~ "Moderate",
 #                                  rating >= 94 && rating <= 100 ~ "High",))
 
+#There were 8996 observations out of the ~ 130k rows with a NA value in the column "price". To be able to do an analys of the data, we need to change that.
+#   Here we change the NA values to be the average of the rest of the values in the column:
+mean_price = mean(wine130$price, na.rm = TRUE)
+wine130$price[is.na(wine130$price)] = mean_price
