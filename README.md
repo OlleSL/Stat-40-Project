@@ -1,6 +1,9 @@
 # Stat-40-Project
 R analysis project on a wine dataset consisting of data cleaning and a lot of visualizations.
 
+#Summary of Data sets
+For Our project we will be utilizing two data sets on wine reviews. The data sets we will be using are from kaggle and these are their respective links: Wine Reviews | Kaggle (winemag-data-130k-v2.csv) and Wine Reviews Data
+
 #Summary of Datasets
 For our project we will be utilizing two data sets on wine reviews. The data sets we will be using are from Kaggle and these are their respective links: Wine Reviews | Kaggle (winemag-data-130k-v2.csv) and Wine Reviews Data | Kaggle. Below is a summary of each column and what it contains.
 
