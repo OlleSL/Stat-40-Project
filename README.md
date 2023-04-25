@@ -7,7 +7,7 @@ For our project we will be utilizing two data sets on wine reviews. The data set
 # Wine Reviews Data, Columns & Descriptions:  
 Wine: Name of wine  
 Winery: Name of winery  
-Category: Type of wine
+Category: Type of wine  
 Designation: Designation of wine  
 Varietal: Type of grape  
 Appellation: Region of wine  
@@ -31,7 +31,7 @@ Taster_twitter_handle: Twitter related to the taster
 Title: The title of the wine review, which often contains the vintage  
 Variety: The type of grapes used to make the wine  
 Winery: The winery that made the wine  
-
+  
 # Research Questions  
 Which country produces the most wine?  
 How does alcohol percentage affect the price of wine?  
