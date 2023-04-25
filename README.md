@@ -1,4 +1,4 @@
-# Stat-40-Project
+## Stat-40-Project
 R analysis project on a wine dataset consisting of data cleaning and a lot of visualizations.
 
 # Summary of Datasets
@@ -17,28 +17,28 @@ Rating: Rating from reviews
 Reviewer: Name of reviewer  
 Review: Description of review  
 
-# Wine Reviews, Columns & Descriptions:
-Country: The country that the wine is from
-Description: Description of the wine
-Designation: The vineyard within the winery where the grapes that made the wine are from
-Points: The number of points wine enthusiast rated the wine on a scale of 1-100
-Price: The cost for a bottle of wine
-Province: The province or state that the wine is from
-Region_1: The wine growing area in a province or state (ie Napa)
-Region_2: Sometimes there are more specific regions specified within a wine growing area (ie Rutherford inside the Napa Valley) this value is often blank
-Taster_name: Name of the wine enthusiast tasting the wine
-Taster_twitter_handle: Twitter related to the taster
-Title: The title of the wine review, which often contains the vintage
-Variety: The type of grapes used to make the wine 
-Winery: The winery that made the wine
+# Wine Reviews, Columns & Descriptions:  
+Country: The country that the wine is from  
+Description: Description of the wine  
+Designation: The vineyard within the winery where the grapes that made the wine are from  
+Points: The number of points wine enthusiast rated the wine on a scale of 1-100  
+Price: The cost for a bottle of wine  
+Province: The province or state that the wine is from  
+Region_1: The wine growing area in a province or state (ie Napa)  
+Region_2: Sometimes there are more specific regions specified within a wine growing area (ie Rutherford inside the Napa Valley) this value is often blank  
+Taster_name: Name of the wine enthusiast tasting the wine  
+Taster_twitter_handle: Twitter related to the taster  
+Title: The title of the wine review, which often contains the vintage  
+Variety: The type of grapes used to make the wine  
+Winery: The winery that made the wine  
 
-# Research Questions
-Which country produces the most wine?
-How does alcohol percentage affect the price of wine?
-Which wine taster has tasted the most wines?
-Which wines have the highest ratings?
+# Research Questions  
+Which country produces the most wine?  
+How does alcohol percentage affect the price of wine?  
+Which wine taster has tasted the most wines?  
+Which wines have the highest ratings?  
  
 
 
-# Data Cleaning/Manipulation 
+# Data Cleaning/Manipulation  
 So far, we removed unnecessary rows such as review and description, which both take up a lot of space. We removed the characters in price and alcohol percentage to convert them to numeric columns. Some of the price entries were not numbers (e.g. "DrizlyVivino") and were replaced as NA. Grouping the data by the taster/reviewer and the wine shows that the only thing stopping this pair of columns from being a primary key is that the alcohol percentage is only rounded sometimes and the tasters give a different review each time they taste a wine.  
