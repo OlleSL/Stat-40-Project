@@ -4,18 +4,18 @@ R analysis project on a wine dataset consisting of data cleaning and a lot of vi
 # Summary of Datasets
 For our project we will be utilizing two data sets on wine reviews. The data sets we will be using are from Kaggle and these are their respective links: Wine Reviews | Kaggle (winemag-data-130k-v2.csv) and Wine Reviews Data | Kaggle. Below is a summary of each column and what it contains.
 
-# Wine Reviews Data, Columns & Descriptions:
-Wine: Name of wine
-Winery: Name of winery
+# Wine Reviews Data, Columns & Descriptions:  
+Wine: Name of wine  
+Winery: Name of winery  
 Category: Type of wine
-Designation: Designation of wine
-Varietal: Type of grape
-Appellation: Region of wine
-Alcohol: Alcohol content
-Price: Price in dollars $
-Rating: Rating from reviews
-Reviewer: Name of reviewer
-Review: Description of review
+Designation: Designation of wine  
+Varietal: Type of grape  
+Appellation: Region of wine  
+Alcohol: Alcohol content  
+Price: Price in dollars $  
+Rating: Rating from reviews  
+Reviewer: Name of reviewer  
+Review: Description of review  
 
 # Wine Reviews, Columns & Descriptions:
 Country: The country that the wine is from
