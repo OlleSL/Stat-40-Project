@@ -41,4 +41,4 @@ Which wines have the highest ratings?
 
 
 #Data Cleaning/Manipulation 
-So far, we removed unnecessary rows such as review and description, which both take up a lot of space. We removed the characters in price and alcohol percentage to convert them to numeric columns. Some of the price entries were not numbers (e.g. "DrizlyVivino") and were replaced as NA. Grouping the data by the taster/reviewer and the wine shows that the only thing stopping this pair of columns from being a primary key is that the alcohol percentage is only rounded sometimes and the tasters give a different review each time they taste a wine. 
+So far, we removed unnecessary rows such as review and description, which both take up a lot of space. We removed the characters in price and alcohol percentage to convert them to numeric columns. Some of the price entries were not numbers (e.g. "DrizlyVivino") and were replaced as NA. Grouping the data by the taster/reviewer and the wine shows that the only thing stopping this pair of columns from being a primary key is that the alcohol percentage is only rounded sometimes and the tasters give a different review each time they taste a wine.  
