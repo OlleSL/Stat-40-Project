@@ -4,14 +4,15 @@ rm (list = ls())
 library(tidyverse)
 
 #Load data sets:
-wine130 <- read.csv("Data/winemag-data-130k-v2.csv")
-wine <- read.csv("Data/wine.csv")
+wine130 <- read.csv("project/winemag-data-130k-v2.csv")
+wine <- read.csv("project/wine.csv")
 
 #Make some changes to the data set. Remove column and change the way two variables
 # are structured:
 wine <- wine %>% subset(select = -c(review)) %>%
-  mutate(price = as.numeric( gsub("\\$", "", price)),
-         alcohol = as.numeric(gsub("\\%", "", alcohol)))
+  mutate(price = as.numeric( gsub("\\$", "", price) ),
+         alcohol = as.numeric( gsub("\\%", "", alcohol) ),
+         alcohol = ceiling(alcohol) )
 
 #Remove two columns from the wine130 data set:
 wine130 <- wine130 %>% 
@@ -31,6 +32,8 @@ wn130 <- wine130 %>%
   summarize(count = n()) %>%
   arrange(desc(count))
 
+#There are multiple rows for many wine taster and wine pairings
+
 #Checking if two logical statements are true to then display these rows where it equals TRUE.
 #This is used to look into specific tasting occasions:
 wine130[wine130$taster_name == "Michael Schachner" & 
@@ -38,6 +41,8 @@ wine130[wine130$taster_name == "Michael Schachner" &
 wine[wine$reviewer == "Michael Schachner" & 
        wine$wine == "Segura Viudas NV Extra Dry Sparkling (Cava)",]
 
+#This shows that the ratings for a specific wine will vary each instance the taster rates it
+#For Michael Schachner the ratings of this wine range from 83 to 89
 
 #new_wine = merge(wine130, wine, by.x = "title", by.y = "wine")
 
@@ -49,5 +54,7 @@ wine[wine$reviewer == "Michael Schachner" &
 
 #There were 8996 observations out of the ~ 130k rows with a NA value in the column "price". To be able to do an analys of the data, we need to change that.
 #   Here we change the NA values to be the average of the rest of the values in the column:
-mean_price = mean(wine130$price, na.rm = TRUE)
-wine130$price[is.na(wine130$price)] = mean_price
+
+#We should group by the type of wine before we do this
+#mean_price = mean(wine130$price, na.rm = TRUE)
+#wine130$price[is.na(wine130$price)] = mean_price
