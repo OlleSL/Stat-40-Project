@@ -58,3 +58,11 @@ wine[wine$reviewer == "Michael Schachner" &
 #We should group by the type of wine before we do this
 #mean_price = mean(wine130$price, na.rm = TRUE)
 #wine130$price[is.na(wine130$price)] = mean_price
+
+#Which country produces the most wine?
+wine130 %>%
+  ggplot()+
+  geom_bar(aes(x = fct_infreq(country)), fill = "#722F37") +
+  coord_flip()+
+  labs( x = "Country (Ordered from least to most common)", y = "Count")
+
