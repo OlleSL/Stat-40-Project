@@ -44,14 +44,17 @@ wine[wine$reviewer == "Michael Schachner" &
 #This shows that the ratings for a specific wine will vary each instance the taster rates it
 #For Michael Schachner the ratings of this wine range from 83 to 89
 
-#new_wine = merge(wine130, wine, by.x = "title", by.y = "wine")
-
 #add a new column showcasing level of wine ratings (low, moderate, high)
 #new_wine = new_wine %>%
 #  mutate(level_rating = case_when(rating >= 80 && rating <= 86 ~ "Low",
 #                                  rating >= 87 && rating <= 93 ~ "Moderate",
 #                                  rating >= 94 && rating <= 100 ~ "High",))
 
+wine <- wine%>%mutate(new_wine = factor(new_wine, levels = c("Low", "Moderate", "High")
+
+#Calculating the average price of wine for each level of rating
+price_by_rating_level <- wine%>%group_by(level_rating) %>%summarise(count = n(),mean_price = mean(price, na.rm=TRUE))
+                                        
 #There were 8996 observations out of the ~ 130k rows with a NA value in the column "price". To be able to do an analys of the data, we need to change that.
 #   Here we change the NA values to be the average of the rest of the values in the column:
 
@@ -59,7 +62,7 @@ wine[wine$reviewer == "Michael Schachner" &
 #mean_price = mean(wine130$price, na.rm = TRUE)
 #wine130$price[is.na(wine130$price)] = mean_price
 
-#Which country produces the most wine?
+#Research Question: Which country produces the most wine?
 wine130 %>%
   ggplot()+
   geom_bar(aes(x = fct_infreq(country)), fill = "#722F37") +
@@ -81,3 +84,17 @@ ggplot(data = taster_name_count)+
        y = "Count",
        title = "Count of Wine Reviews by Taster Name")+
   theme(legend.position = "none")
+
+#Research Question: Which wines have the highest ratings? 
+#Results for the wine data set
+wine %>% arrange(desc(rating)) %>% head(5) 
+#Results for the wine130 data set
+wine130 %>% arrange(desc(points)) %>% head(5) 
+                                        
+#Graph showing level rating vs price                                        
+ggplot(data = wine) +
+geom_point(aes(x = level_rating, y = price),colour = "#722F37", alpha = I(.3)) +
+facet_wrap(~level_rating) +
+labs(x = "Rating", y = "Price"
+                                        
+
