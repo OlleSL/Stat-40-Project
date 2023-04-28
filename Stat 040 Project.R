@@ -66,3 +66,17 @@ wine130 %>%
   coord_flip()+
   labs( x = "Country (Ordered from least to most common)", y = "Count")
 
+
+#Resarch Question: Which wine taster has tasted the most wines?
+taster_name_count = wine130%>%
+  group_by(taster_name)%>%
+  summarise(count = n())%>%
+  arrange(desc(count))
+
+ggplot(data = taster_name_count)+
+  geom_col(aes(x = fct_reorder(taster_name, -count), y = count, fill = count))+
+  coord_flip()+
+  scale_fill_gradient(low = "grey", high = "blue")+
+  labs(x = "Taster Name",
+       y = "Count",
+       title = "Count of Wine Reviews by Taster Name")
