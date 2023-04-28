@@ -79,4 +79,5 @@ ggplot(data = taster_name_count)+
   scale_fill_gradient(low = "grey", high = "blue")+
   labs(x = "Taster Name",
        y = "Count",
-       title = "Count of Wine Reviews by Taster Name")
+       title = "Count of Wine Reviews by Taster Name")+
+  theme(legend.position = "none")
