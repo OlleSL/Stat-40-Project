@@ -50,22 +50,6 @@ wine[wine$reviewer == "Michael Schachner" &
 #This shows that the ratings for a specific wine will vary each instance the taster rates it
 #For Michael Schachner the ratings of this wine range from 83 to 89
 
-#new_wine = merge(wine130, wine, by.x = "title", by.y = "wine")
-
-#add a new column showcasing level of wine ratings (low, moderate, high)
-#new_wine = new_wine %>%
-#  mutate(level_rating = case_when(rating >= 80 && rating <= 86 ~ "Low",
-#                                  rating >= 87 && rating <= 93 ~ "Moderate",
-#                                  rating >= 94 && rating <= 100 ~ "High",))
-
-#There were 8996 observations out of the ~ 130k rows with a NA value in the column "price". To be able to do an analys of the data, we need to change that.
-#   Here we change the NA values to be the average of the rest of the values in the column:
-
-#We should group by the type of wine before we do this
-#mean_price = mean(wine130$price, na.rm = TRUE)
-#wine130$price[is.na(wine130$price)] = mean_price
-
-
 ###### Which country produces the most wine? #####
 wine130 %>%
   ggplot()+
