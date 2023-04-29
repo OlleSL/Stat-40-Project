@@ -120,10 +120,10 @@ wine%>%
                             breaks = c(-Inf, 15, 30, 45, 200 ,Inf), 
                             labels = c("0-15$", "15-30$", "30-45$", "45-60", "200+"), 
                             include.lowest = TRUE)) %>%
-  group_by(price_range) %>%
-  summarise(mean_rating = mean(rating, na.rm = TRUE), count = n()) %>%
+  group_by(price_range, rating) %>%
+  summarise(mean_rating = mean(rating, na.rm = TRUE)) %>%
   ggplot()+
-  geom_col(aes(x = price_range, y = mean_rating, fill = price_range))+
+  geom_col(aes(x = price_range, y = rating, fill = price_range))+
   scale_fill_manual(values = c("0-15$" = "#9400D3", "15-30$" = "#4B0082", 
                                "30-45$" = "#B22222", "45-60" = "#722F37",
                                "200+" = "violet"))+
