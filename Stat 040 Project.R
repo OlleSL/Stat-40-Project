@@ -91,12 +91,12 @@ ggplot(data = wine)+
        title = "Relationship Between Price and Alcohol of Wines")
 
 #add a new column showcasing level of wine ratings (low, moderate, high)
-new_wine = new_wine %>%
-  mutate(level_rating = case_when(rating >= 80 && rating <= 86 ~ "Low",
-                                  rating >= 87 && rating <= 93 ~ "Moderate",
-                                  rating >= 94 && rating <= 100 ~ "High",))
+wine <- wine %>% 
+  mutate(level_rating = case_when(rating >= 80 & rating <= 86 ~ "Low",
+                                  rating >= 87 & rating <= 93 ~ "Moderate",
+                                  rating >= 94 & rating <= 100 ~ "High",))
 
-wine <- wine%>%mutate(new_wine = factor(new_wine, levels = c("Low", "Moderate", "High")
+wine <- wine%>% mutate(new_wine = factor(new_wine, levels = c("Low", "Moderate", "High")
 
 #Calculating the average price of wine for each level of rating
 price_by_rating_level <- wine%>%group_by(level_rating) %>%summarise(count = n(),mean_price = mean(price, na.rm=TRUE))
