@@ -59,6 +59,7 @@ wine[wine$reviewer == "Michael Schachner" &
 #mean_price = mean(wine130$price, na.rm = TRUE)
 #wine130$price[is.na(wine130$price)] = mean_price
 
+
 #Which country produces the most wine?
 wine130 %>%
   ggplot()+
@@ -67,7 +68,7 @@ wine130 %>%
   labs( x = "Country (Ordered from least to most common)", y = "Count")
 
 
-#Resarch Question: Which wine taster has tasted the most wines?
+#Which wine taster has tasted the most wines?
 taster_name_count = wine130%>%
   group_by(taster_name)%>%
   summarise(count = n())%>%
@@ -81,3 +82,10 @@ ggplot(data = taster_name_count)+
        y = "Count",
        title = "Count of Wine Reviews by Taster Name")+
   theme(legend.position = "none")
+
+
+#How does alcohol percentage affect the price of wine?
+
+
+#Which wines have the highest ratings?
+
