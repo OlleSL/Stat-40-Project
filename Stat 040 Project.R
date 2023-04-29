@@ -112,3 +112,22 @@ ggplot(data = wine) +
 geom_point(aes(x = level_rating, y = price),colour = "#722F37", alpha = I(.3)) +
 facet_wrap(~level_rating) +
 labs(x = "Rating", y = "Price"
+
+     
+# there is something here that is not working, whatever I change, the bars remains the same...
+wine%>%
+  mutate(price_range = cut(price, 
+                            breaks = c(-Inf, 15, 30, 45, 200 ,Inf), 
+                            labels = c("0-15$", "15-30$", "30-45$", "45-60", "200+"), 
+                            include.lowest = TRUE)) %>%
+  group_by(price_range) %>%
+  summarise(mean_rating = mean(rating, na.rm = TRUE), count = n()) %>%
+  ggplot()+
+  geom_col(aes(x = price_range, y = mean_rating, fill = price_range))+
+  scale_fill_manual(values = c("0-15$" = "#9400D3", "15-30$" = "#4B0082", 
+                               "30-45$" = "#B22222", "45-60" = "#722F37",
+                               "200+" = "violet"))+
+  labs(x = "Price Range", 
+       y = "Mean Rating",
+       title = "Mean Rating per Price Range of Wine")+
+  theme(legend.position = "none") 
