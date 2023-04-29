@@ -18,6 +18,12 @@ wine <- wine %>% subset(select = -c(review)) %>%
 wine130 <- wine130 %>% 
   subset(select = -c(X, description, taster_twitter_handle))
 
+#Replacing the NA with the mean:
+mean_alcohol = mean(wine$alcohol, na.rm = TRUE)
+wine$alcohol[is.na(wine$alcohol)] = mean_alcohol
+mean_price = mean(wine$price, na.rm = TRUE)
+wine$price[is.na(wine$price)] = mean_price
+
 #create a new data frame from the wine data set that only consists of:
 # "reviewer", "wine" and "count" and arrange it descending by the count:
 wn <- wine %>%
@@ -69,33 +75,24 @@ wine130 %>%
 
 
 ##### Which wine taster has tasted the most wines? #####
-#Creating a data frame grouped by reviewer with a count variable that drops rows where reviewer is an empty string:
-taster_name_count <- wine %>%
+wine %>%
   group_by(reviewer) %>%
   summarise(count = n()) %>%
   mutate(reviewer = case_when(reviewer == "" ~ NA_character_,
                               TRUE ~ reviewer)) %>%
   drop_na() %>%
-  arrange(desc(count))
-
-#Plotting the taster_name_count data frame:
-ggplot(data = taster_name_count)+
+  arrange(desc(count)) %>%
+  ggplot()+
   geom_col(aes(x = fct_reorder(reviewer, -count), y = count, fill = count))+
   coord_flip()+
   scale_fill_gradient(low = "#FFFFFF", high = "#722F37") +
   labs(x = "Taster Name",
        y = "Count",
-       title = "Count of Wine Reviews by Taster Name")+
-  theme(legend.position = "none")
+       title = "Count of Wine Reviews by Taster Name",
+       fill = "Count")
 
 
 ###### How does alcohol percentage affect the price of wine? #####
-#Replacing the NA with the mean:
-mean_alcohol = mean(wine$alcohol, na.rm = TRUE)
-wine$alcohol[is.na(wine$alcohol)] = mean_alcohol
-mean_wine_price = mean(wine$price, na.rm = TRUE)
-wine$price[is.na(wine$price)] = mean_wine_price
-
 #Calculating the standard deviation for the alcohol and price in order to create a scatterplot:
 sd_alcohol <- sd(wine$alcohol, na.rm = TRUE)
 sd_price <- sd(wine$price, na.rm = TRUE)
@@ -103,7 +100,7 @@ sd_price <- sd(wine$price, na.rm = TRUE)
 #Plotting the relationship between the alcohol and price variable within 3 standard deviations from the mean:
 ggplot(data = head(wine, 50000))+
   geom_point(aes(x = price, y = alcohol))+
-  scale_x_continuous(limits = c(0, mean_wine_price + 3 * sd_price))+
+  scale_x_continuous(limits = c(0, mean_price + 3 * sd_price))+
   scale_y_continuous(limits = c(0, mean_alcohol + 3 * sd_alcohol))+
   labs(x = "Price of Wine (USD $)",
        y = "Alcohol Percentage of Wine",
@@ -111,4 +108,3 @@ ggplot(data = head(wine, 50000))+
 
 
 ##### Which wines have the highest ratings? #####
-
