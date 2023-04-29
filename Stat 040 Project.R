@@ -80,9 +80,9 @@ taster_name_count <- wine %>%
 
 #Plotting the taster_name_count data frame:
 ggplot(data = taster_name_count)+
-  geom_col(aes(x = fct_reorder(taster_name, -count), y = count, fill = count))+
+  geom_col(aes(x = fct_reorder(reviewer, -count), y = count, fill = count))+
   coord_flip()+
-  scale_fill_gradient(low = "grey", high = "blue")+
+  scale_fill_gradient(low = "#FFFFFF", high = "#722F37") +
   labs(x = "Taster Name",
        y = "Count",
        title = "Count of Wine Reviews by Taster Name")+
