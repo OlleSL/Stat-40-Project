@@ -85,7 +85,21 @@ ggplot(data = taster_name_count)+
 
 
 #How does alcohol percentage affect the price of wine?
+#Replacing the NA with the mean:
+mean_alcohol = mean(wine$alcohol, na.rm = TRUE)
+wine$alcohol[is.na(wine$alcohol)] = mean_alcohol
+mean_wine_price = mean(wine$price, na.rm = TRUE)
+wine$price[is.na(wine$price)] = mean_wine_price
 
+#Calculating the standard deviation for the alcohol and price in order to create a scatterplot:
+sd_alcohol <- sd(wine$alcohol, na.rm = TRUE)
+sd_price <- sd(wine$price, na.rm = TRUE)
+
+#Plotting the relationship between the alcohol and price variable within 3 standard deviations from the mean:
+ggplot(data = head(wine, 50000))+
+  geom_point(aes(x = price, y = alcohol))+
+  scale_x_continuous(limits = c(0, mean_price + 3 * sd_price)) +
+  scale_y_continuous(limits = c(0, mean_alcohol + 3 * sd_alcohol))
 
 #Which wines have the highest ratings?
 
