@@ -99,7 +99,11 @@ sd_price <- sd(wine$price, na.rm = TRUE)
 ggplot(data = head(wine, 50000))+
   geom_point(aes(x = price, y = alcohol))+
   scale_x_continuous(limits = c(0, mean_wine_price + 3 * sd_price))+
-  scale_y_continuous(limits = c(0, mean_alcohol + 3 * sd_alcohol))
+  scale_y_continuous(limits = c(0, mean_alcohol + 3 * sd_alcohol))+
+  labs(x = "Price of Wine (USD $)",
+       y = "Alcohol Percentage of Wine",
+       title = "Relationship Between Price and Alcohol of Wines")
+
 
 ##### Which wines have the highest ratings? #####
 
