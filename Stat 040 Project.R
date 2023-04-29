@@ -69,11 +69,16 @@ wine130 %>%
 
 
 ##### Which wine taster has tasted the most wines? #####
-taster_name_count = wine130%>%
-  group_by(taster_name)%>%
-  summarise(count = n())%>%
+#Creating a data frame grouped by reviewer with a count variable that drops rows where reviewer is an empty string:
+taster_name_count <- wine %>%
+  group_by(reviewer) %>%
+  summarise(count = n()) %>%
+  mutate(reviewer = case_when(reviewer == "" ~ NA_character_,
+                              TRUE ~ reviewer)) %>%
+  drop_na() %>%
   arrange(desc(count))
 
+#Plotting the taster_name_count data frame:
 ggplot(data = taster_name_count)+
   geom_col(aes(x = fct_reorder(taster_name, -count), y = count, fill = count))+
   coord_flip()+
