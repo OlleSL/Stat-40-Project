@@ -77,7 +77,7 @@ wine %>%
 
 
 ###### How does alcohol percentage affect the price of wine? #####
-#Calculating the standard deviation for the alcohol and price in order to create a scatterplot:
+#Calculating the standard deviation for the alcohol and price in order to appropriately filter out outliers from scatterplot:
 sd_alcohol <- sd(wine$alcohol, na.rm = TRUE)
 sd_price <- sd(wine$price, na.rm = TRUE)
 
