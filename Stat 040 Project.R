@@ -98,7 +98,7 @@ sd_alcohol <- sd(wine$alcohol, na.rm = TRUE)
 sd_price <- sd(wine$price, na.rm = TRUE)
 
 #Plotting the relationship between the alcohol and price variable within 3 standard deviations from the mean:
-ggplot(data = head(wine, 50000))+
+ggplot(data = wine)+
   geom_point(aes(x = price, y = alcohol))+
   scale_x_continuous(limits = c(0, mean_price + 3 * sd_price))+
   scale_y_continuous(limits = c(0, mean_alcohol + 3 * sd_alcohol))+
