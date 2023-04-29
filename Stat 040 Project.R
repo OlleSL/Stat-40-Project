@@ -60,7 +60,7 @@ wine[wine$reviewer == "Michael Schachner" &
 #wine130$price[is.na(wine130$price)] = mean_price
 
 
-#Which country produces the most wine?
+###### Which country produces the most wine? #####
 wine130 %>%
   ggplot()+
   geom_bar(aes(x = fct_infreq(country)), fill = "#722F37") +
@@ -68,7 +68,7 @@ wine130 %>%
   labs( x = "Country (Ordered from least to most common)", y = "Count")
 
 
-#Which wine taster has tasted the most wines?
+##### Which wine taster has tasted the most wines? #####
 taster_name_count = wine130%>%
   group_by(taster_name)%>%
   summarise(count = n())%>%
@@ -84,7 +84,7 @@ ggplot(data = taster_name_count)+
   theme(legend.position = "none")
 
 
-#How does alcohol percentage affect the price of wine?
+###### How does alcohol percentage affect the price of wine? #####
 #Replacing the NA with the mean:
 mean_alcohol = mean(wine$alcohol, na.rm = TRUE)
 wine$alcohol[is.na(wine$alcohol)] = mean_alcohol
@@ -101,5 +101,5 @@ ggplot(data = head(wine, 50000))+
   scale_x_continuous(limits = c(0, mean_wine_price + 3 * sd_price))+
   scale_y_continuous(limits = c(0, mean_alcohol + 3 * sd_alcohol))
 
-#Which wines have the highest ratings?
+##### Which wines have the highest ratings? #####
 
