@@ -119,7 +119,7 @@ wine %>%
     price <= 15 ~ "0-15$",
     price > 15 & price <= 30 ~ "15-30$",
     price > 30 & price <= 45 ~ "30-45$",
-    price > 45 & price <= 4000 ~ "45-60$",
+    price > 45 & price <= 60 ~ "45-60$",
     price > 60 ~ "60+")) %>%
   group_by(price_range) %>%
   summarise(mean_rating = mean(rating, na.rm = TRUE)) %>%
