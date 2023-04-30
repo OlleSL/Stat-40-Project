@@ -77,18 +77,21 @@ wine %>%
 
 
 ###### How does alcohol percentage affect the price of wine? #####
-#Calculating the standard deviation for the alcohol and price in order to appropriately filter out outliers from scatterplot:
-sd_alcohol <- sd(wine$alcohol, na.rm = TRUE)
-sd_price <- sd(wine$price, na.rm = TRUE)
-
-#Plotting the relationship between the alcohol and price variable within 3 standard deviations from the mean:
-ggplot(data = wine)+
-  geom_point(aes(x = price, y = alcohol))+
-  scale_x_continuous(limits = c(0, mean_price + 3 * sd_price))+
-  scale_y_continuous(limits = c(0, mean_alcohol + 3 * sd_alcohol))+
+wine %>%
+  mutate(alcohol = replace_na(alcohol, mean(alcohol, na.rm = TRUE)),
+         price = replace_na(price, mean(price, na.rm = TRUE)),
+         sd_alcohol = sd(alcohol, na.rm = TRUE),
+         sd_price = sd(price, na.rm = TRUE),
+         mean_alcohol = mean(alcohol),
+         mean_price = mean(price)) %>%
+  ggplot() +
+  geom_point(aes(x = price, y = alcohol), alpha = 0.1) +
   labs(x = "Price of Wine (USD $)",
        y = "Alcohol Percentage of Wine",
-       title = "Relationship Between Price and Alcohol of Wines")
+       title = "Relationship Between Price and Alcohol of Wines",
+       subtitle = "Within Three Standard Deviations from Mean") +
+  scale_x_continuous(limits = c(0, mean(wine$price, na.rm = TRUE) + 3 * sd(wine$price, na.rm = TRUE))) +
+  scale_y_continuous(limits = c(0, mean(wine$alcohol, na.rm = TRUE) + 3 * sd(wine$alcohol, na.rm = TRUE)))
 
 #add a new column showcasing level of wine ratings (low, moderate, high)
 wine <- wine %>% 
