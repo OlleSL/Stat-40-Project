@@ -117,9 +117,17 @@ price_by_rating_level <- wine%>%
 
 ##### Which wines have the highest ratings? #####
 #Results for the wine data set
-wine %>% arrange(desc(rating)) %>% head(5) 
+highest_wine_5 <- wine%>%
+  arrange(desc(rating)) %>% 
+  head(5) 
+
+highest_wine_5
 #Results for the wine130 data set
-wine130 %>% arrange(desc(points)) %>% head(5) 
+highest_wine130_5 <- wine130%>%
+  arrange(desc(points)) %>% 
+  head(5) 
+
+highest_wine130_5
 
 #Graph showing level rating vs price                                            
 wine %>%
