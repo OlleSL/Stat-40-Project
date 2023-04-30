@@ -136,16 +136,18 @@ wine %>%
     price > 15 & price <= 30 ~ "15-30$",
     price > 30 & price <= 45 ~ "30-45$",
     price > 45 & price <= 60 ~ "45-60$",
-    price > 60 ~ "60+")) %>%
+    price > 60 & price <= 100 ~ "60-100$",
+    price > 100 ~ "100$+")) %>%
   group_by(price_range) %>%
   summarise(mean_rating = mean(rating, na.rm = TRUE)) %>%
   ggplot() +
   geom_col(aes(x = reorder(price_range, mean_rating), y = mean_rating, fill = price_range)) +
   scale_fill_manual(values = c("0-15$" = "#9400D3", "15-30$" = "#4B0082",
                                "30-45$" = "#B22222", "45-60$" = "#722F37",
-                               "60+" = "violet")) +
-  labs(x = "Price Range", y = "Mean Rating",
+                               "60-100$" = "violet", "100$+" = "#FF4433")) +
+  labs(x = "Price Range", 
+       y = "Mean Rating",
        title = "Mean Rating per Price Range of Wine") +
   theme(legend.position = "none")+
   geom_text(aes(x = reorder(price_range, mean_rating), y = mean_rating,
-                label = round(mean_rating, 2)), vjust = -0.5)
+                label = round(mean_rating, 2)), vjust = -0.4)
