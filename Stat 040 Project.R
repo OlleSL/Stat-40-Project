@@ -114,20 +114,22 @@ facet_wrap(~level_rating) +
 labs(x = "Rating", y = "Price"
 
      
-# there is something here that is not working, whatever I change, the bars remains the same...
-wine%>%
-  mutate(price_range = cut(price, 
-                            breaks = c(-Inf, 15, 30, 45, 200 ,Inf), 
-                            labels = c("0-15$", "15-30$", "30-45$", "45-60", "200+"), 
-                            include.lowest = TRUE)) %>%
-  group_by(price_range, rating) %>%
+wine %>%
+  mutate(price_range = case_when(
+    price <= 15 ~ "0-15$",
+    price > 15 & price <= 30 ~ "15-30$",
+    price > 30 & price <= 45 ~ "30-45$",
+    price > 45 & price <= 4000 ~ "45-60$",
+    price > 60 ~ "60+")) %>%
+  group_by(price_range) %>%
   summarise(mean_rating = mean(rating, na.rm = TRUE)) %>%
-  ggplot()+
-  geom_col(aes(x = price_range, y = rating, fill = price_range))+
-  scale_fill_manual(values = c("0-15$" = "#9400D3", "15-30$" = "#4B0082", 
-                               "30-45$" = "#B22222", "45-60" = "#722F37",
-                               "200+" = "violet"))+
-  labs(x = "Price Range", 
-       y = "Mean Rating",
-       title = "Mean Rating per Price Range of Wine")+
-  theme(legend.position = "none") 
+  ggplot() +
+  geom_col(aes(x = reorder(price_range, mean_rating), y = mean_rating, fill = price_range)) +
+  scale_fill_manual(values = c("0-15$" = "#9400D3", "15-30$" = "#4B0082",
+                               "30-45$" = "#B22222", "45-60$" = "#722F37",
+                               "60+" = "violet")) +
+  labs(x = "Price Range", y = "Mean Rating",
+       title = "Mean Rating per Price Range of Wine") +
+  theme(legend.position = "none")+
+  geom_text(aes(x = reorder(price_range, mean_rating), y = mean_rating,
+                label = round(mean_rating, 2)), vjust = -0.5)
