@@ -52,11 +52,18 @@ wine[wine$reviewer == "Michael Schachner" &
 
 ###### Which country produces the most wine? #####
 wine130 %>%
+  group_by(country)%>%
+  summarise(count = n())%>%
   ggplot()+
-  geom_bar(aes(x = fct_infreq(country)), fill = "#722F37") +
+  geom_col(aes(x = fct_reorder(country, -count), y = count, fill = count)) +
   coord_flip()+
-  labs( x = "Country (Ordered from least to most common)", y = "Count")
-
+  labs( x = "Country (Ordered from least to most common)", 
+        y = "Count",
+        title = "Wine Produced per Country",
+        fill = "Count") +
+  scale_fill_gradient(low = "#808080", high = "#722F37")+
+  geom_text(aes(x = fct_reorder(country, -count), y = count, label = count), size = 2.5, hjust = -0.05) +
+  theme(legend.position = "none")
 
 ##### Which wine taster has tasted the most wines? #####
 wine %>%
