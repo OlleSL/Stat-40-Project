@@ -18,11 +18,13 @@ wine <- wine %>% subset(select = -c(review)) %>%
 wine130 <- wine130 %>% 
   subset(select = -c(X, description, taster_twitter_handle))
 
-#Replacing the NA with the mean:
+#Replacing the NA with the mean in the two data sets:
 mean_alcohol = mean(wine$alcohol, na.rm = TRUE)
 wine$alcohol[is.na(wine$alcohol)] = mean_alcohol
 mean_price = mean(wine$price, na.rm = TRUE)
 wine$price[is.na(wine$price)] = mean_price
+mean_wine_price = mean(wine130$price, na.rm = TRUE)
+wine130$price[is.na(wine130$price)] = mean_wine_price
 
 #create a new data frame from the wine data set that only consists of:
 # "reviewer", "wine" and "count" and arrange it descending by the count:
