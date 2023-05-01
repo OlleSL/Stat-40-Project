@@ -35,7 +35,7 @@ Winery: The winery that made the wine
 ## Research Questions  
 Which country produces the most wine?  
 How does alcohol percentage affect the price of wine?  
-How does category affect the rating of the wine?  
+How does the category affect the rating of the wine?  
 Which wine taster has tasted the most wines?  
 Which wines have the highest ratings?  
 
