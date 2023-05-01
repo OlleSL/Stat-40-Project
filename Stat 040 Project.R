@@ -176,3 +176,16 @@ wine130 %>%
   theme(legend.position = "none")+
   geom_text(aes(x = reorder(price_range, mean_points), y = mean_points,
                 label = round(mean_points, 2)), vjust = -0.4)
+
+#How does the category of the wine affect the rating?
+wine %>%
+  ggplot()+
+  geom_boxplot(aes(x = fct_reorder(category, -rating), y = rating, fill = category))+
+  labs(x = "Category",
+       y = "Rating",
+       title = "Relationship Between Category and Rating")+
+  theme(legend.position = "none") +
+  scale_fill_manual(values = c("Red" = "#9400D3", "White" = "#4B0082",
+                               "Sparkling" = "#B22222", "Dessert" = "#722F37",
+                               "Port/Sherry" = "violet", "Rose" = "#FF4433",
+                               "Fortified" = "skyblue")) 
