@@ -18,14 +18,6 @@ wine <- wine %>% subset(select = -c(review)) %>%
 wine130 <- wine130 %>% 
   subset(select = -c(X, description, taster_twitter_handle))
 
-#Replacing the NA with the mean in the two data sets:
-mean_alcohol = mean(wine$alcohol, na.rm = TRUE)
-wine$alcohol[is.na(wine$alcohol)] = mean_alcohol
-mean_price = mean(wine$price, na.rm = TRUE)
-wine$price[is.na(wine$price)] = mean_price
-mean_wine_price = mean(wine130$price, na.rm = TRUE)
-wine130$price[is.na(wine130$price)] = mean_wine_price
-
 #create a new data frame from the wine data set that only consists of:
 # "reviewer", "wine" and "count" and arrange it descending by the count:
 wn <- wine %>%
@@ -87,9 +79,7 @@ wine %>%
 
 ###### How does alcohol percentage affect the price of wine? #####
 wine %>%
-  mutate(alcohol = replace_na(alcohol, mean(alcohol, na.rm = TRUE)),
-         price = replace_na(price, mean(price, na.rm = TRUE)),
-         sd_alcohol = sd(alcohol, na.rm = TRUE),
+  mutate(sd_alcohol = sd(alcohol, na.rm = TRUE),
          sd_price = sd(price, na.rm = TRUE),
          mean_alcohol = mean(alcohol),
          mean_price = mean(price)) %>%
@@ -104,9 +94,9 @@ wine %>%
 
 #add a new column showcasing level of wine ratings (low, moderate, high)
 wine <- wine %>% 
-  mutate(level_rating = case_when(rating >= 80 & rating <= 86 ~ "Low",
-                                  rating >= 87 & rating <= 93 ~ "Moderate",
-                                  rating >= 94 & rating <= 100 ~ "High",))
+  mutate(level_rating = case_when(rating <= 86 ~ "Low",
+                                  rating <= 93 ~ "Moderate",
+                                  TRUE ~ "High",))
 #Need to work more on this, not sure if we even need this.
 wine <- wine%>% 
  factor(level_rating, levels = c("Low", "Moderate", "High"))
@@ -140,11 +130,11 @@ highest_wine130_5
 wine %>%
   mutate(price_range = case_when(
     price <= 15 ~ "0-15$",
-    price > 15 & price <= 30 ~ "15-30$",
-    price > 30 & price <= 45 ~ "30-45$",
-    price > 45 & price <= 60 ~ "45-60$",
-    price > 60 & price <= 100 ~ "60-100$",
-    price > 100 ~ "100$+")) %>%
+    price <= 30 ~ "15-30$",
+    price <= 45 ~ "30-45$",
+    price <= 60 ~ "45-60$",
+    price <= 100 ~ "60-100$",
+    TRUE ~ "100$+")) %>%
   group_by(price_range) %>%
   summarise(mean_rating = mean(rating, na.rm = TRUE)) %>%
   ggplot() +
@@ -163,11 +153,11 @@ wine %>%
 wine130 %>%
   mutate(price_range = case_when(
     price <= 15 ~ "0-15$",
-    price > 15 & price <= 30 ~ "15-30$",
-    price > 30 & price <= 45 ~ "30-45$",
-    price > 45 & price <= 60 ~ "45-60$",
-    price > 60 & price <= 100 ~ "60-100$",
-    price > 100 ~ "100$+")) %>%
+    price <= 30 ~ "15-30$",
+    price <= 45 ~ "30-45$",
+    price <= 60 ~ "45-60$",
+    price <= 100 ~ "60-100$",
+    TRUE ~ "100$+")) %>%
   group_by(price_range) %>%
   summarise(mean_points = mean(points, na.rm = TRUE)) %>%
   ggplot() +
