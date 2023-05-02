@@ -96,16 +96,15 @@ wine %>%
 wine <- wine %>% 
   mutate(level_rating = case_when(rating <= 86 ~ "Low",
                                   rating <= 93 ~ "Moderate",
-                                  TRUE ~ "High",))
+                                  TRUE ~ "High"))
 #Need to work more on this, not sure if we even need this.
-wine <- wine%>% 
- factor(level_rating, levels = c("Low", "Moderate", "High"))
+wine$level_rating <- factor(wine$level_rating, levels = c("Low", "Moderate", "High"))
 
 #Calculating the average price of wine for each level of rating
 price_by_rating_level <- wine%>%
-      group_by(level_rating) %>%
-      summarise(count = n(),
-      mean_price = mean(price, na.rm=TRUE))
+  group_by(level_rating) %>%
+  summarise(count = n(),
+            mean_price = mean(price, na.rm=TRUE))
 
 ##### Which wines have the highest ratings? #####
 #Results for the wine data set
