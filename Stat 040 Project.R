@@ -96,16 +96,15 @@ wine %>%
 wine <- wine %>% 
   mutate(level_rating = case_when(rating <= 86 ~ "Low",
                                   rating <= 93 ~ "Moderate",
-                                  TRUE ~ "High",))
+                                  TRUE ~ "High"))
 #Need to work more on this, not sure if we even need this.
-wine <- wine%>% 
- factor(level_rating, levels = c("Low", "Moderate", "High"))
+wine$level_rating <- factor(wine$level_rating, levels = c("Low", "Moderate", "High"))
 
 #Calculating the average price of wine for each level of rating
 price_by_rating_level <- wine%>%
-      group_by(level_rating) %>%
-      summarise(count = n(),
-      mean_price = mean(price, na.rm=TRUE))
+  group_by(level_rating) %>%
+  summarise(count = n(),
+            mean_price = mean(price, na.rm=TRUE))
 
 ##### Which wines have the highest ratings? #####
 #Results for the wine data set
@@ -172,7 +171,7 @@ wine130 %>%
   geom_text(aes(x = reorder(price_range, mean_points), y = mean_points,
                 label = round(mean_points, 2)), vjust = -0.4)
 
-
+##### How does the category affect the rating of the wine? #####
 wine %>%
   ggplot()+
   geom_boxplot(aes(x = fct_reorder(category, -rating), y = rating, fill = category))+
@@ -184,3 +183,4 @@ wine %>%
                                "Sparkling" = "#B22222", "Dessert" = "#722F37",
                                "Port/Sherry" = "violet", "Rose" = "#FF4433",
                                "Fortified" = "skyblue")) 
+#Here we can see that the "Dessert" wine is the highest rated wine while the "Rose" is the lowest rated wine.
