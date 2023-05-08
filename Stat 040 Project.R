@@ -58,6 +58,7 @@ wine130 %>%
   scale_fill_gradient(low = "#808080", high = "#722F37")+
   geom_text(aes(x = fct_reorder(country, -count), y = count, label = count), size = 2.5, hjust = -0.05) +
   theme(legend.position = "none")
+#Here we can see that the United States produces the most wine, with a count of 5450. Slovakia, Egypt & China are the lowest with a count of 1.
 
 ##### Which wine taster has tasted the most wines? #####
 wine %>%
@@ -75,7 +76,7 @@ wine %>%
        y = "Count",
        title = "Count of Wine Reviews by Taster Name",
        fill = "Count")
-
+#Roger Voss
 
 ###### How does alcohol percentage affect the price of wine? #####
 wine %>%
