@@ -1,4 +1,4 @@
-#Clear work space:
+#Clear workspace:
 rm (list = ls())
 #Load library:
 library(tidyverse)
@@ -9,14 +9,14 @@ wine <- read.csv("project/wine.csv")
 
 #Make some changes to the data set. Remove column and change the way two variables
 # are structured:
-wine <- wine %>% subset(select = -c(review)) %>%
+wine <- wine %>% subset(select = -c(review, designation, varietal, appellation)) %>%
   mutate(price = as.numeric( gsub("\\$", "", price) ),
          alcohol = as.numeric( gsub("\\%", "", alcohol) ),
          alcohol = ceiling(alcohol) )
 
-#Remove two columns from the wine130 data set:
+#Remove columns from the wine130 data set:
 wine130 <- wine130 %>% 
-  subset(select = -c(X, description, taster_twitter_handle))
+  subset(select = -c(X, description, taster_twitter_handle, designation, province, region_1, region_2))
 
 #create a new data frame from the wine data set that only consists of:
 # "reviewer", "wine" and "count" and arrange it descending by the count:
@@ -97,7 +97,7 @@ wine <- wine %>%
   mutate(level_rating = case_when(rating <= 86 ~ "Low",
                                   rating <= 93 ~ "Moderate",
                                   TRUE ~ "High"))
-#Need to work more on this, not sure if we even need this.
+
 wine$level_rating <- factor(wine$level_rating, levels = c("Low", "Moderate", "High"))
 
 #Calculating the average price of wine for each level of rating
