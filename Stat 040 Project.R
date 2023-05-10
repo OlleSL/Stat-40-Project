@@ -171,6 +171,9 @@ wine130 %>%
   theme(legend.position = "none")+
   geom_text(aes(x = reorder(price_range, mean_points), y = mean_points,
                 label = round(mean_points, 2)), vjust = -0.4)
+# We can see that there is a positive relationship between the price and the rating, meaning 
+# that the higher the price is, the higher the rating will be. This is the case for both
+# of the data sets. 
 
 ##### How does the category affect the rating of the wine? #####
 wine %>%
