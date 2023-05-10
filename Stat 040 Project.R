@@ -76,7 +76,7 @@ wine %>%
        y = "Count",
        title = "Count of Wine Reviews by Taster Name",
        fill = "Count")
-#Roger Voss
+#Roger Voss had tasted the most wines.
 
 ###### How does alcohol percentage affect the price of wine? #####
 wine %>%
