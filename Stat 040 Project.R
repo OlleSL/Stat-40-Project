@@ -92,6 +92,7 @@ wine %>%
        subtitle = "Within Three Standard Deviations from Mean") +
   scale_x_continuous(limits = c(0, mean(wine$price, na.rm = TRUE) + 3 * sd(wine$price, na.rm = TRUE))) +
   scale_y_continuous(limits = c(0, mean(wine$alcohol, na.rm = TRUE) + 3 * sd(wine$alcohol, na.rm = TRUE)))
+# There is a weak positive relationship between the alcohol and the price. 
 
 #add a new column showcasing level of wine ratings (low, moderate, high)
 wine <- wine %>% 
